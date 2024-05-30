@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">基础开源框架</string>
+    <string name="main_tab_customer">题库</string>
+    <string name="main_tab_mine">我的</string>
+    <string name="upload_cloud">上传云端</string>
+    <string name="download_cloud">同步云端</string>
+    <string name="skip">跳过</string>
+    <string name="boot_tip">启动页，正在启动...</string>
+    <string name="full_dialog">全屏弹窗</string>
+    <string name="save">保存</string>
+    <string name="common_dialog">通用弹窗</string>
+</resources>

@@ -1,0 +1,80 @@
+plugins {
+    id 'com.android.library'
+    id 'kotlin-android'
+}
+
+apply from: "mvn-config.gradle"
+
+ext {
+    min_sdk = 19
+    target_sdk = 33
+}
+
+android {
+    namespace "com.yanyu.libs.baseframe"
+    compileSdk target_sdk
+
+    defaultConfig {
+        minSdk min_sdk
+        targetSdk target_sdk
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    buildFeatures {
+        viewBinding = true
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+    sourceSets {
+        main {
+            // res 资源目录配置
+            res.srcDirs('src/main/res', 'src/main/res-sw')
+        }
+    }
+}
+
+dependencies {
+
+    implementation 'androidx.core:core-ktx:1.10.1'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'com.google.android.material:material:1.10.0'
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+    //    集成 viewModel
+    api 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1'
+
+    // 吐司框架：https://github.com/getActivity/Toaster
+    api 'com.github.getActivity:Toaster:12.6'
+
+    // KLog
+    def klog_version = '1.1.6'
+    api "com.github.iLife-yanyu:klog:$klog_version" // 这个是jitpack仓库
+    // api "com.yanyu.klog:klog:$klog_version" // 这个是本地仓库
+    // Kotlin
+    api "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    // https://alibaba.github.io/fastjson2/kotlin_cn
+    api "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
+    api 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.2'
+    api 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.2'
+    api "androidx.activity:activity-ktx:1.8.0"
+    api "androidx.fragment:fragment-ktx:1.5.6"
+    api "androidx.lifecycle:lifecycle-runtime-ktx:2.6.1"
+    api "io.github.cymchad:BaseRecyclerViewAdapterHelper:3.0.14"
+    // https://gitee.com/lxj_gitee/XPopup?_from=gitee_search
+    api 'com.github.li-xiaojun:XPopup:2.10.0'
+    api 'com.google.code.gson:gson:2.11.0'
+}

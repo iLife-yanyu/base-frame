@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/dp_52"
+    android:background="@android:color/white"
+    tools:context=".widget.LineLeftTitleBar">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/titleMain"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginStart="@dimen/dp_16"
+        android:gravity="center"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/sp_20"
+        android:textStyle="bold"
+        tools:text="主标题" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/titleSecond"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_marginStart="@dimen/dp_8"
+        android:layout_weight="1"
+        android:gravity="center|start"
+        android:paddingTop="@dimen/dp_5"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/sp_14"
+        tools:text="副标题" />
+
+    <FrameLayout
+        android:id="@+id/rightContainer1"
+        android:layout_width="@dimen/dp_48"
+        android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivRight1"
+            android:layout_width="@dimen/dp_32"
+            android:layout_height="@dimen/dp_32"
+            android:layout_gravity="center" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/rightContainer2"
+        android:layout_width="@dimen/dp_48"
+        android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivRight2"
+            android:layout_width="@dimen/dp_32"
+            android:layout_height="@dimen/dp_32"
+            android:layout_gravity="center" />
+    </FrameLayout>
+
+</androidx.appcompat.widget.LinearLayoutCompat>

@@ -1,0 +1,89 @@
+apply plugin: 'maven-publish'
+
+// 远程仓库的地址
+def getReleaseRepositoryUrl() {
+    return hasProperty('RELEASE_REPOSITORY_URL') ? RELEASE_REPOSITORY_URL : ""
+}
+
+// 你访问远程仓库的账号
+def getRepositoryUsername() {
+    return hasProperty('USERNAME') ? USERNAME : ""
+}
+
+// 你访问远程仓库的密码
+def getRepositoryPassword() {
+    return hasProperty('PASSWORD') ? PASSWORD : ""
+}
+
+def getArtifactId() {
+    return hasProperty('ARTIFACT_ID') ? ARTIFACT_ID : ""
+}
+
+def getGroupName() {
+    return hasProperty('GROUP_ID') ? GROUP_ID : ""
+}
+
+def getVersionName() {
+    return hasProperty('LIBRARY_VERSION') ? LIBRARY_VERSION : ""
+}
+
+// 携带源码上传，包含kt源码
+tasks.register('sourceJar', Jar) {
+    if (project.hasProperty("kotlin")) {
+        from android.sourceSets.main.java.getSrcDirs()
+    } else if (project.hasProperty("android")) {
+        from android.sourceSets.main.java.sourceFiles
+    } else {
+        from sourceSets.main.allSource
+    }
+    archiveClassifier = 'sources'
+}
+
+afterEvaluate { project ->
+    publishing {
+        // def versionName = project.android.defaultConfig.versionName 当然也可以直接拿build.gradle里面的versionName
+        publications {
+            release(MavenPublication) {
+                artifact sourceJar // 增加上传源码的 task
+                afterEvaluate { artifact(tasks.getByName("bundleReleaseAar")) } // 通过依赖生成 aar 包任务
+                groupId = getGroupName()
+                artifactId = getArtifactId()
+                version = getVersionName()
+                // groupId:artifactId:version
+                // 例如，com.github.CMzhizhe:NetWorkSdkKotlin:v1.0.6
+                // 这里可以认为
+                // groupId = com.github.CMzhizhe
+                // artifactId = NetWorkSdkKotlin
+                // version = v1.0.6
+                // 添加依赖传递
+                pom.withXml { a ->
+                    def dependenciesNode = asNode().appendNode('dependencies')
+                    configurations.implementation.allDependencies.each {
+                        if (it.group != null && (it.name != null && "unspecified" != it.name) && it.version != null) {
+                            println "dependency=${it.toString()}"
+                            def dependencyNode = dependenciesNode.appendNode('dependency')
+                            dependencyNode.appendNode('groupId', it.group)
+                            dependencyNode.appendNode('artifactId', it.name)
+                            dependencyNode.appendNode('version', it.version)
+                            dependencyNode.appendNode('scope', 'implementation')
+                        }
+                    }
+                }
+            }
+
+        }
+        repositories {
+            // 用于配置 maven 仓库地址
+            maven {
+                url = getReleaseRepositoryUrl()
+                allowInsecureProtocol = true
+                credentials(PasswordCredentials) {
+                    username = getRepositoryUsername()
+                    password = getRepositoryPassword()
+                }
+            }
+        }
+    }
+}
+
+// 执行命令将包发布到本地的maven仓库 ./gradlew publishToMavenLocal

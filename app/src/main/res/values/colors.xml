@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 熊猫色（黑白背景通吃） -->
+    <color name="panda">#FF757575</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="main_color">#1296db</color>
+    <color name="tab_item_unselected">#bfbfbf</color>
+
+    <!-- 透明色 -->
+    <color name="common_accent_color">#5A8DDF</color>
+
+    <!-- 按钮按压时的颜色 -->
+    <color name="common_button_pressed_color">#AA5A8DDF</color>
+    <!-- 按钮禁用时的颜色 -->
+    <color name="common_button_disable_color">#BBBBBB</color>
+    <color name="white90">#E6FFFFFF</color>
+    <color name="black">#FF000000</color>
+
+    <!-- App 样式中引用的颜色 -->
+    <color name="common_primary_color">@color/white</color>
+    <color name="common_primary_dark_color">@color/black</color>
+    <color name="common_window_background_color">#F4F4F4</color>
+    <color name="dialog_background_color">#33000000</color>
+    <color name="common_text_color">#333333</color>
+    <color name="common_text_hint_color">@color/panda</color>
+</resources>

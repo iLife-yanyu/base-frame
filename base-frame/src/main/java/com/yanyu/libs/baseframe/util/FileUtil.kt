@@ -1,6 +1,6 @@
 package com.yanyu.libs.baseframe.util
 
-import com.yanyu.klog.KLog
+import com.yanyu.libs.klog.KLog
 import com.yanyu.libs.baseframe.callback.ICallback
 import java.io.File
 import java.io.FileInputStream

@@ -8,7 +8,7 @@ import androidx.annotation.DimenRes
 import androidx.annotation.DrawableRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import com.yanyu.klog.KLog
+import com.yanyu.libs.klog.KLog
 import java.io.InputStream
 
 fun Context.getAppPath(suffix: String = ""): String {

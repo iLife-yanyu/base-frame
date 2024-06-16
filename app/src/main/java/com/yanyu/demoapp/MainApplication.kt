@@ -3,8 +3,8 @@ package com.yanyu.demoapp
 import com.yanyu.libs.baseframe.BaseApplication
 import com.yanyu.demoapp.config.ConsoleConfigImpl
 import com.yanyu.demoapp.config.FileConfigImpl
-import com.yanyu.klog.DeleteLogsTask
-import com.yanyu.klog.KLog
+import com.yanyu.libs.klog.DeleteLogsTask
+import com.yanyu.libs.klog.KLog
 
 class MainApplication : BaseApplication() {
 

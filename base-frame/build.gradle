@@ -61,7 +61,7 @@ dependencies {
     api 'com.github.getActivity:Toaster:12.6'
 
     // KLog
-    def klog_version = '1.1.6'
+    def klog_version = '1.1.8'
     api "com.github.iLife-yanyu:klog:$klog_version" // 这个是jitpack仓库
     // api "com.yanyu.klog:klog:$klog_version" // 这个是本地仓库
     // Kotlin

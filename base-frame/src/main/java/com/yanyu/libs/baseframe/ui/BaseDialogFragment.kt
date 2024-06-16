@@ -9,7 +9,7 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
 import androidx.viewbinding.ViewBinding
-import com.yanyu.klog.KLog
+import com.yanyu.libs.klog.KLog
 
 /**
  * 生命周期是先 show -> onCreateView -> onViewCreated -> onDismiss -> onDestroyView -> onDestroy，

@@ -1,7 +1,7 @@
 package com.yanyu.libs.baseframe.click
 
 import android.view.View
-import com.yanyu.klog.KLog
+import com.yanyu.libs.klog.KLog
 
 abstract class CheckSingleClickListener(private var threshold: Int = 1000) : View.OnClickListener {
 

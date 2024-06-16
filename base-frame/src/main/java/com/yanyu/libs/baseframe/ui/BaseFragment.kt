@@ -10,7 +10,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
 import com.yanyu.libs.baseframe.widget.LoadingDialog
-import com.yanyu.klog.KLog
+import com.yanyu.libs.klog.KLog
 
 abstract class BaseFragment<VB : ViewBinding> : Fragment() {
 

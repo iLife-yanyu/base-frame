@@ -63,7 +63,7 @@ dependencies {
     // KLog
     def klog_version = '1.1.8'
     api "com.github.iLife-yanyu:klog:$klog_version" // 这个是jitpack仓库
-    // api "com.yanyu.klog:klog:$klog_version" // 这个是本地仓库
+    // api "com.yanyu.libs.android:klog:$klog_version" // 这个是本地仓库
     // Kotlin
     api "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     // https://alibaba.github.io/fastjson2/kotlin_cn

@@ -77,4 +77,10 @@ dependencies {
     // https://gitee.com/lxj_gitee/XPopup?_from=gitee_search
     api 'com.github.li-xiaojun:XPopup:2.10.0'
     api 'com.google.code.gson:gson:2.11.0'
+    // 基础依赖包，必须要依赖
+    api 'com.geyifeng.immersionbar:immersionbar:3.2.2'
+    // kotlin扩展（可选）
+    api 'com.geyifeng.immersionbar:immersionbar-ktx:3.2.2'
+    // fragment快速实现（可选）已废弃
+    api 'com.geyifeng.immersionbar:immersionbar-components:3.2.2'
 }

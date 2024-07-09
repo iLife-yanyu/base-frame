@@ -2,8 +2,10 @@ package com.yanyu.demoapp.ui.fragment
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import com.yanyu.libs.baseframe.ui.BaseFragment
 import com.yanyu.demoapp.databinding.FragmentUserBinding
+import com.yanyu.demoapp.ui.activity.TestMainActivity
+import com.yanyu.libs.baseframe.ui.BaseFragment
+import com.yanyu.libs.baseframe.ui.startActivityKtx
 
 class UserFragment : BaseFragment<FragmentUserBinding>() {
 
@@ -37,6 +39,7 @@ class UserFragment : BaseFragment<FragmentUserBinding>() {
     }
 
     private fun upload2cloud() {
+        startActivityKtx(TestMainActivity::class.java)
     }
 
     private fun downloadFromCloud() {

@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewbinding.ViewBinding
+import com.gyf.immersionbar.ImmersionBar
 import com.yanyu.libs.baseframe.widget.LoadingDialog
 import com.yanyu.libs.klog.KLog
 
@@ -38,6 +39,7 @@ abstract class BaseActivity<VB : ViewBinding> : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = createViewBinding(layoutInflater)
         setContentView(binding.root)
+        initImmersionBar()
         initData()
         initListeners()
         initViews()
@@ -49,6 +51,16 @@ abstract class BaseActivity<VB : ViewBinding> : AppCompatActivity() {
     }
 
     abstract fun createViewBinding(layoutInflater: LayoutInflater): VB
+
+    private fun initImmersionBar() {
+        configImmersionBar(ImmersionBar.with(this)).init()
+    }
+
+    protected open fun configImmersionBar(immersionBar: ImmersionBar): ImmersionBar {
+        return immersionBar.statusBarColor(android.R.color.white) // 设置颜色
+            .statusBarDarkFont(true) // 设置字体
+            .fitsSystemWindows(true) // 适配屏幕
+    }
 
     abstract fun initData()
 

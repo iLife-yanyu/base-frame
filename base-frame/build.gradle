@@ -30,6 +30,7 @@ android {
     }
     buildFeatures {
         viewBinding = true
+        buildConfig = false
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -61,7 +62,7 @@ dependencies {
     api 'com.github.getActivity:Toaster:12.6'
 
     // KLog
-    def klog_version = '1.1.8'
+    def klog_version = '1.1.9'
     api "com.github.iLife-yanyu:klog:$klog_version" // 这个是jitpack仓库
     // api "com.yanyu.libs.android:klog:$klog_version" // 这个是本地仓库
     // Kotlin

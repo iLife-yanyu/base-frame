@@ -35,17 +35,14 @@ abstract class BaseDialogFragment<VB : ViewBinding, DATA> : DialogFragment() {
         innerBinding = null
         data = null
         onDismissListener = null
-        KLog.e("BaseDialogFragment", "onDestroyView")
     }
 
     final override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        KLog.e("BaseDialogFragment", "onCreateView")
         innerBinding = createViewBinding(inflater, container)
         return binding.root
     }
 
     final override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        KLog.e("BaseDialogFragment", "onViewCreated")
         super.onViewCreated(view, savedInstanceState)
         initData()
         initListeners()
@@ -55,7 +52,6 @@ abstract class BaseDialogFragment<VB : ViewBinding, DATA> : DialogFragment() {
     override fun onDismiss(dialog: DialogInterface) {
         super.onDismiss(dialog)
         onDismissListener?.run()
-        KLog.e("BaseDialogFragment", "onDismiss")
     }
 
     override fun show(manager: FragmentManager, tag: String?) {
@@ -66,7 +62,7 @@ abstract class BaseDialogFragment<VB : ViewBinding, DATA> : DialogFragment() {
             e.printStackTrace()
             KLog.e()
         }
-        KLog.e("BaseDialogFragment", "show")
+        KLog.extendLog(javaClass)
     }
 
     abstract fun createViewBinding(inflater: LayoutInflater, container: ViewGroup?): VB

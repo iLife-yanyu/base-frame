@@ -31,16 +31,4 @@ object GsonUtil {
     fun <T> fromJson(json: String): T? {
         return gson.fromJson(json, object : TypeToken<T>() {}.type)
     }
-    /**
-     * 将JSON字符串转换为Java List集合
-     */
-    fun <T> fromJsonToList(json: String?, clazz: Class<T>): List<T>? {
-        return gson.fromJson(json, object : TypeToken<List<T>?>() {}.type)
-    }
-    /**
-     * 将JSON字符串转换为Java List集合
-     */
-    fun <T> fromJsonToList(json: String?, type: Type?): List<T>? {
-        return gson.fromJson(json, object : TypeToken<List<T>?>() {}.type)
-    }
 }

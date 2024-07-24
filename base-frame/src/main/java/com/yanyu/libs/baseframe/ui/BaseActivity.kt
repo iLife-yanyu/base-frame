@@ -11,6 +11,7 @@ import com.gyf.immersionbar.ImmersionBar
 import com.yanyu.libs.baseframe.coroutine.requestIO
 import com.yanyu.libs.baseframe.coroutine.requestMain
 import com.yanyu.libs.baseframe.widget.LoadingDialog
+import com.yanyu.libs.baseframe.widget.showing
 import com.yanyu.libs.klog.KLog
 
 abstract class BaseActivity<VB : ViewBinding> : AppCompatActivity() {
@@ -19,7 +20,7 @@ abstract class BaseActivity<VB : ViewBinding> : AppCompatActivity() {
         this@BaseActivity.javaClass.simpleName
     }
     protected lateinit var binding: VB
-    private var loadingDialog: LoadingDialog? = null
+    private var loadingDialog: LoadingDialog.Builder? = null
     protected val activityResultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
         iLauncherResult?.let {
             it.callback(result.data, result.resultCode)
@@ -49,7 +50,7 @@ abstract class BaseActivity<VB : ViewBinding> : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        loadingDialog?.dismiss()
+        dismissLoading()
     }
 
     abstract fun createViewBinding(layoutInflater: LayoutInflater): VB
@@ -70,15 +71,17 @@ abstract class BaseActivity<VB : ViewBinding> : AppCompatActivity() {
 
     abstract fun initViews()
 
-    fun showLoading() {
-        if (loadingDialog == null) {
-            loadingDialog = LoadingDialog.buildDefault(this)
+    @JvmOverloads
+    fun showLoading(message: String? = null) {
+        if (loadingDialog.showing()) {
+            return
         }
-        loadingDialog?.show()
+        loadingDialog = LoadingDialog.Builder(this).show(message)
     }
 
     fun dismissLoading() {
         loadingDialog?.dismiss()
+        loadingDialog = null
     }
 
     fun <T : Activity> launchResult(clazz: Class<T>, launcherResult: ILauncherResult? = null) {

@@ -12,6 +12,7 @@ import androidx.viewbinding.ViewBinding
 import com.yanyu.libs.baseframe.coroutine.requestIO
 import com.yanyu.libs.baseframe.coroutine.requestMain
 import com.yanyu.libs.baseframe.widget.LoadingDialog
+import com.yanyu.libs.baseframe.widget.showing
 import com.yanyu.libs.klog.KLog
 
 abstract class BaseFragment<VB : ViewBinding> : Fragment() {
@@ -27,7 +28,7 @@ abstract class BaseFragment<VB : ViewBinding> : Fragment() {
     }
     val logTag: String by lazy(LazyThreadSafetyMode.NONE) { this.javaClass.simpleName }
     protected var iLauncherResult: ILauncherResult? = null
-    private var loadingDialog: LoadingDialog? = null
+    private var loadingDialog: LoadingDialog.Builder? = null
     override fun onResume() {
         super.onResume()
         KLog.extendLog(javaClass)
@@ -36,7 +37,7 @@ abstract class BaseFragment<VB : ViewBinding> : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         innerBinding = null
-        loadingDialog?.dismiss()
+        dismissLoading()
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -59,15 +60,17 @@ abstract class BaseFragment<VB : ViewBinding> : Fragment() {
 
     abstract fun initViews()
 
-    fun showLoading() {
-        if (loadingDialog == null) {
-            loadingDialog = LoadingDialog.buildDefault(requireContext())
+    @JvmOverloads
+    fun showLoading(message: String? = null) {
+        if (loadingDialog.showing()) {
+            return
         }
-        loadingDialog?.show()
+        loadingDialog = LoadingDialog.Builder(requireContext()).show(message)
     }
 
     fun dismissLoading() {
         loadingDialog?.dismiss()
+        loadingDialog = null
     }
 
     fun <T : Activity> launchResult(clazz: Class<T>, launcherResult: ILauncherResult? = null) {

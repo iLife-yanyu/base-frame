@@ -3,11 +3,11 @@ package com.yanyu.demoapp.ui.fragment
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.hjq.toast.Toaster
-import com.yanyu.libs.baseframe.ui.BaseFragment
 import com.yanyu.demoapp.R
 import com.yanyu.demoapp.databinding.FragmentHomeBinding
 import com.yanyu.demoapp.ui.dialog.TestCommonDialog
 import com.yanyu.demoapp.ui.dialog.TestFullDialog
+import com.yanyu.libs.baseframe.ui.BaseFragment
 
 class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
@@ -21,6 +21,15 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     override fun initListeners() {
         binding.btnFullDialog.setOnClickListener { showFullDialog() }
         binding.btnCommonDialog.setOnClickListener { showCommonDialog() }
+        binding.btnCheckDialog.setOnClickListener { showLoadingDelayDismiss(R.string.check_dialog) }
+        binding.btnLoadingDialog.setOnClickListener { showLoadingDelayDismiss(R.string.loading_dialog) }
+    }
+
+    private fun showLoadingDelayDismiss(dialogMsg: Int) {
+        showLoading(getString(dialogMsg))
+        postDelay {
+            dismissLoading()
+        }
     }
 
     private fun showCommonDialog() {

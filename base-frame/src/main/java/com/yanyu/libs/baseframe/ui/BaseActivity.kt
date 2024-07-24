@@ -8,6 +8,8 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewbinding.ViewBinding
 import com.gyf.immersionbar.ImmersionBar
+import com.yanyu.libs.baseframe.coroutine.requestIO
+import com.yanyu.libs.baseframe.coroutine.requestMain
 import com.yanyu.libs.baseframe.widget.LoadingDialog
 import com.yanyu.libs.klog.KLog
 
@@ -87,5 +89,20 @@ abstract class BaseActivity<VB : ViewBinding> : AppCompatActivity() {
     fun launchResult(intent: Intent, launcherResult: ILauncherResult? = null) {
         iLauncherResult = launcherResult
         activityResultLauncher.launch(intent)
+    }
+
+    @JvmOverloads
+    fun postDelay(delay: Long = 1000, runnable: Runnable) {
+        requestIO {
+            try {
+                Thread.sleep(delay)
+            }
+            catch (_: Exception) {
+
+            }
+            requestMain {
+                runnable.run()
+            }
+        }
     }
 }

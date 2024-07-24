@@ -5,7 +5,6 @@ import android.view.ViewGroup
 import com.yanyu.demoapp.databinding.FragmentUserBinding
 import com.yanyu.demoapp.ui.activity.TestMainActivity
 import com.yanyu.libs.baseframe.ui.BaseFragment
-import com.yanyu.libs.baseframe.ui.startActivityKtx
 
 class UserFragment : BaseFragment<FragmentUserBinding>() {
 

@@ -9,6 +9,8 @@ import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
+import com.yanyu.libs.baseframe.coroutine.requestIO
+import com.yanyu.libs.baseframe.coroutine.requestMain
 import com.yanyu.libs.baseframe.widget.LoadingDialog
 import com.yanyu.libs.klog.KLog
 
@@ -73,18 +75,33 @@ abstract class BaseFragment<VB : ViewBinding> : Fragment() {
         activityResultLauncher.launch(Intent(requireContext(), clazz))
     }
 
-    protected fun replaceAndLaunchIntent(createIntent: Intent, param: ILauncherResult? = null) {
+    fun launchResult(intent: Intent, param: ILauncherResult? = null) {
         iLauncherResult = param
-        activityResultLauncher.launch(createIntent)
+        activityResultLauncher.launch(intent)
     }
-}
 
-fun <T : Activity> BaseFragment<out ViewBinding>.startActivityKtx(clazz: Class<T>) {
-    try {
-        startActivity(Intent(requireContext(), clazz))
+    @JvmOverloads
+    fun postDelay(delay: Long = 1000, runnable: Runnable) {
+        requestIO {
+            try {
+                Thread.sleep(delay)
+            }
+            catch (_: Exception) {
+
+            }
+            requestMain {
+                runnable.run()
+            }
+        }
     }
-    catch (e: Exception) {
-        e.printStackTrace()
-        KLog.e(logTag, "start error ${clazz.simpleName} $e")
+
+    fun <T : Activity> startActivityKtx(clazz: Class<T>) {
+        try {
+            startActivity(Intent(requireContext(), clazz))
+        }
+        catch (e: Exception) {
+            e.printStackTrace()
+            KLog.e(logTag, "start error ${clazz.simpleName} $e")
+        }
     }
 }

@@ -38,7 +38,7 @@ class UserFragment : BaseFragment<FragmentUserBinding>() {
     }
 
     private fun upload2cloud() {
-        startActivityKtx(TestMainActivity::class.java)
+        startActivity(TestMainActivity::class.java)
     }
 
     private fun downloadFromCloud() {

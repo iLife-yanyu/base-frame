@@ -15,6 +15,7 @@ import com.yanyu.libs.baseframe.widget.LoadingDialog
 import com.yanyu.libs.baseframe.widget.showing
 import com.yanyu.libs.klog.KLog
 
+@Suppress("MemberVisibilityCanBePrivate")
 abstract class BaseFragment<VB : ViewBinding> : Fragment() {
 
     private var innerBinding: VB? = null
@@ -73,12 +74,18 @@ abstract class BaseFragment<VB : ViewBinding> : Fragment() {
         loadingDialog = null
     }
 
-    fun <T : Activity> launchResult(clazz: Class<T>, launcherResult: ILauncherResult? = null) {
+    /**
+     * 这个表示一定有回调, 没有回调就调用默认的 startActivity
+     */
+    fun launchResult(clazz: Class<out Activity>, launcherResult: ILauncherResult) {
         iLauncherResult = launcherResult
         activityResultLauncher.launch(Intent(requireContext(), clazz))
     }
 
-    fun launchResult(intent: Intent, param: ILauncherResult? = null) {
+    /**
+     * 这个表示一定有回调, 没有回调就调用默认的 startActivity
+     */
+    fun launchResult(intent: Intent, param: ILauncherResult) {
         iLauncherResult = param
         activityResultLauncher.launch(intent)
     }
@@ -98,7 +105,7 @@ abstract class BaseFragment<VB : ViewBinding> : Fragment() {
         }
     }
 
-    fun <T : Activity> startActivityKtx(clazz: Class<T>) {
+    fun startActivity(clazz: Class<out Activity>) {
         try {
             startActivity(Intent(requireContext(), clazz))
         }

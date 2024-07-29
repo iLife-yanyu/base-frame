@@ -14,6 +14,7 @@ import com.yanyu.libs.baseframe.widget.LoadingDialog
 import com.yanyu.libs.baseframe.widget.showing
 import com.yanyu.libs.klog.KLog
 
+@Suppress("MemberVisibilityCanBePrivate")
 abstract class BaseActivity<VB : ViewBinding> : AppCompatActivity() {
 
     val logTag: String by lazy(LazyThreadSafetyMode.NONE) {
@@ -40,12 +41,16 @@ abstract class BaseActivity<VB : ViewBinding> : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        configBeforeInitRoot()
         binding = createViewBinding(layoutInflater)
         setContentView(binding.root)
         initImmersionBar()
         initData()
         initListeners()
         initViews()
+    }
+
+    protected open fun configBeforeInitRoot() {
     }
 
     override fun onDestroy() {
@@ -84,14 +89,24 @@ abstract class BaseActivity<VB : ViewBinding> : AppCompatActivity() {
         loadingDialog = null
     }
 
-    fun <T : Activity> launchResult(clazz: Class<T>, launcherResult: ILauncherResult? = null) {
+    /**
+     * 这个表示一定有回调, 没有回调就调用默认的 startActivity
+     */
+    fun launchResult(clazz: Class<out Activity>, launcherResult: ILauncherResult) {
         iLauncherResult = launcherResult
         activityResultLauncher.launch(Intent(this, clazz))
     }
 
-    fun launchResult(intent: Intent, launcherResult: ILauncherResult? = null) {
+    /**
+     * 这个表示一定有回调, 没有回调就调用默认的 startActivity
+     */
+    fun launchResult(intent: Intent, launcherResult: ILauncherResult) {
         iLauncherResult = launcherResult
         activityResultLauncher.launch(intent)
+    }
+
+    fun startActivity(clazz: Class<out Activity>) {
+        startActivity(Intent(this, clazz))
     }
 
     @JvmOverloads

@@ -1,26 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resources>
     <!-- 最小宽度适配方案：https://github.com/wildma/ScreenAdaptation -->
-    <dimen name="dp_m_60">-60dp</dimen>
-    <dimen name="dp_m_30">-30dp</dimen>
-    <dimen name="dp_m_20">-20dp</dimen>
-    <dimen name="dp_m_12">-12dp</dimen>
-    <dimen name="dp_m_10">-10dp</dimen>
-    <dimen name="dp_m_8">-8dp</dimen>
-    <dimen name="dp_m_5">-5dp</dimen>
-    <dimen name="dp_m_2">-2dp</dimen>
-    <dimen name="dp_m_1">-1dp</dimen>
+    <dimen name="dpm_60">-60dp</dimen>
+    <dimen name="dpm_30">-30dp</dimen>
+    <dimen name="dpm_20">-20dp</dimen>
+    <dimen name="dpm_12">-12dp</dimen>
+    <dimen name="dpm_10">-10dp</dimen>
+    <dimen name="dpm_8">-8dp</dimen>
+    <dimen name="dpm_5">-5dp</dimen>
+    <dimen name="dpm_2">-2dp</dimen>
+    <dimen name="dpm_1">-1dp</dimen>
 
-    <dimen name="dp_0_1">0.1dp</dimen>
-    <dimen name="dp_0_5">0.5dp</dimen>
+    <dimen name="dp_0p1">0.1dp</dimen>
+    <dimen name="dp_0p5">0.5dp</dimen>
     <dimen name="dp_1">1dp</dimen>
-    <dimen name="dp_1_5">1.5dp</dimen>
+    <dimen name="dp_1p5">1.5dp</dimen>
     <dimen name="dp_2">2dp</dimen>
-    <dimen name="dp_2_5">2.5dp</dimen>
+    <dimen name="dp_2p5">2.5dp</dimen>
     <dimen name="dp_3">3dp</dimen>
-    <dimen name="dp_3_5">3.5dp</dimen>
+    <dimen name="dp_3p5">3.5dp</dimen>
     <dimen name="dp_4">4dp</dimen>
-    <dimen name="dp_4_5">4.5dp</dimen>
+    <dimen name="dp_4p5">4.5dp</dimen>
     <dimen name="dp_5">5dp</dimen>
     <dimen name="dp_6">6dp</dimen>
     <dimen name="dp_7">7dp</dimen>

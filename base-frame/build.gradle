@@ -73,7 +73,7 @@ dependencies {
     api "androidx.lifecycle:lifecycle-runtime-ktx:2.6.1"
     // api "io.github.cymchad:BaseRecyclerViewAdapterHelper4:4.1.4"
     // https://gitee.com/lxj_gitee/XPopup?_from=gitee_search
-    api 'com.github.li-xiaojun:XPopup:2.10.0'
+    // api 'com.github.li-xiaojun:XPopup:2.10.0'
     api 'com.google.code.gson:gson:2.11.0'
     // 基础依赖包，必须要依赖
     api 'com.geyifeng.immersionbar:immersionbar:3.2.2'

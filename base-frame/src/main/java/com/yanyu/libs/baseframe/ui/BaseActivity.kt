@@ -60,14 +60,12 @@ abstract class BaseActivity<VB : ViewBinding> : AppCompatActivity() {
 
     abstract fun createViewBinding(layoutInflater: LayoutInflater): VB
 
-    private fun initImmersionBar() {
-        configImmersionBar(ImmersionBar.with(this)).init()
-    }
-
-    protected open fun configImmersionBar(immersionBar: ImmersionBar): ImmersionBar {
-        return immersionBar.statusBarColor(android.R.color.white) // 设置颜色
+    protected open fun initImmersionBar() {
+        val immersionBar = ImmersionBar.with(this)
+        immersionBar.statusBarColor(android.R.color.white) // 设置颜色
             .statusBarDarkFont(true) // 设置字体
             .fitsSystemWindows(true) // 适配屏幕
+            .init()
     }
 
     abstract fun initData()

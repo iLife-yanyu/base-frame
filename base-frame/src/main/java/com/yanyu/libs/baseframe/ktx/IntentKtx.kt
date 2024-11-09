@@ -24,10 +24,19 @@ fun Intent.convertString(data: Any): Intent {
 }
 
 fun Intent?.getBool(defValue: Boolean): Boolean {
-    return this?.getBooleanExtra("BoolParam", defValue) ?: return defValue
+    return this?.getBooleanExtra("BoolParam", defValue) ?: defValue
 }
 
 fun Intent.putBool(value: Boolean): Intent {
     putExtra("BoolParam", value)
+    return this
+}
+
+fun Intent?.getInt(defValue: Int): Int {
+    return this?.getIntExtra("IntParam", defValue) ?: defValue
+}
+
+fun Intent.putInt(value: Int): Intent {
+    putExtra("IntParam", value)
     return this
 }

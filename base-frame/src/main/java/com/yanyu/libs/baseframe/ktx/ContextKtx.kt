@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.graphics.drawable.Drawable
-import androidx.annotation.DimenRes
 import androidx.annotation.DrawableRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -30,11 +29,10 @@ fun Context.openAssets(fileName: String): InputStream {
     return assets.open(fileName)
 }
 
-fun Context.getDimen(@DimenRes id: Int): Float {
-    return resources.getDimension(id)
-}
-
 @SuppressLint("UseCompatLoadingForDrawables")
-fun Context.getDrawableKtx(@DrawableRes id: Int): Drawable {
+fun Context.getDrawableKtx(
+        @DrawableRes
+        id: Int
+): Drawable {
     return ContextCompat.getDrawable(this, id)!!
 }

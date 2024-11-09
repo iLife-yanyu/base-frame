@@ -9,4 +9,6 @@
     <string name="full_dialog">全屏弹窗</string>
     <string name="save">保存</string>
     <string name="common_dialog">通用弹窗</string>
+    <string name="check_dialog">检查中...</string>
+    <string name="loading_dialog">加载中...</string>
 </resources>

@@ -9,9 +9,13 @@ import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
+import com.yanyu.libs.baseframe.coroutine.requestIO
+import com.yanyu.libs.baseframe.coroutine.requestMain
 import com.yanyu.libs.baseframe.widget.LoadingDialog
+import com.yanyu.libs.baseframe.widget.showing
 import com.yanyu.libs.klog.KLog
 
+@Suppress("MemberVisibilityCanBePrivate")
 abstract class BaseFragment<VB : ViewBinding> : Fragment() {
 
     private var innerBinding: VB? = null
@@ -25,7 +29,7 @@ abstract class BaseFragment<VB : ViewBinding> : Fragment() {
     }
     val logTag: String by lazy(LazyThreadSafetyMode.NONE) { this.javaClass.simpleName }
     protected var iLauncherResult: ILauncherResult? = null
-    private var loadingDialog: LoadingDialog? = null
+    private var loadingDialog: LoadingDialog.Builder? = null
     override fun onResume() {
         super.onResume()
         KLog.extendLog(javaClass)
@@ -34,7 +38,7 @@ abstract class BaseFragment<VB : ViewBinding> : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         innerBinding = null
-        loadingDialog?.dismiss()
+        dismissLoading()
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -57,34 +61,57 @@ abstract class BaseFragment<VB : ViewBinding> : Fragment() {
 
     abstract fun initViews()
 
-    fun showLoading() {
-        if (loadingDialog == null) {
-            loadingDialog = LoadingDialog.buildDefault(requireContext())
+    @JvmOverloads
+    fun showLoading(message: String? = null) {
+        if (loadingDialog.showing()) {
+            return
         }
-        loadingDialog?.show()
+        loadingDialog = LoadingDialog.Builder(requireContext()).show(message)
     }
 
     fun dismissLoading() {
         loadingDialog?.dismiss()
+        loadingDialog = null
     }
 
-    fun <T : Activity> launchResult(clazz: Class<T>, launcherResult: ILauncherResult? = null) {
+    /**
+     * 这个表示一定有回调, 没有回调就调用默认的 startActivity
+     */
+    fun launchResult(clazz: Class<out Activity>, launcherResult: ILauncherResult) {
         iLauncherResult = launcherResult
         activityResultLauncher.launch(Intent(requireContext(), clazz))
     }
 
-    protected fun replaceAndLaunchIntent(createIntent: Intent, param: ILauncherResult? = null) {
+    /**
+     * 这个表示一定有回调, 没有回调就调用默认的 startActivity
+     */
+    fun launchResult(intent: Intent, param: ILauncherResult) {
         iLauncherResult = param
-        activityResultLauncher.launch(createIntent)
+        activityResultLauncher.launch(intent)
     }
-}
 
-fun <T : Activity> BaseFragment<out ViewBinding>.startActivityKtx(clazz: Class<T>) {
-    try {
-        startActivity(Intent(requireContext(), clazz))
+    @JvmOverloads
+    fun postDelay(delay: Long = 1000, runnable: Runnable) {
+        requestIO {
+            try {
+                Thread.sleep(delay)
+            }
+            catch (_: Exception) {
+
+            }
+            requestMain {
+                runnable.run()
+            }
+        }
     }
-    catch (e: Exception) {
-        e.printStackTrace()
-        KLog.e(logTag, "start error ${clazz.simpleName} $e")
+
+    fun startActivity(clazz: Class<out Activity>) {
+        try {
+            startActivity(Intent(requireContext(), clazz))
+        }
+        catch (e: Exception) {
+            e.printStackTrace()
+            KLog.e(logTag, "start error ${clazz.simpleName} $e")
+        }
     }
 }
